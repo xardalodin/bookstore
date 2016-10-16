@@ -31,9 +31,9 @@ namespace bookstore.backend.Class
         {            
             List<IBooksWithInterface> templist = new List<IBooksWithInterface>();
             // refactoring abit using Linq
-            templist = books.Where(c =>
+            return books.Where(c =>
             c.Title.ToLower().Contains(search.ToLower())
-            || c.Author.ToLower().Contains(search.ToLower())).ToList();
+            || c.Author.ToLower().Contains(search.ToLower()));
 
             /*
             foreach (var book in books)
@@ -44,7 +44,7 @@ namespace bookstore.backend.Class
                 }
             }
             */
-            return templist.AsEnumerable();
+            //return templist.AsEnumerable();
         }
         /// <summary>
         /// async download of json file I assume its working.. 

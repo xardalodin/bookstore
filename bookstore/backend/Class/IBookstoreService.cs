@@ -30,7 +30,12 @@ namespace bookstore.backend.Class
         public IEnumerable<backend.Class.IBooksWithInterface> Search(IEnumerable<backend.Class.IBooksWithInterface> books, string search)
         {            
             List<IBooksWithInterface> templist = new List<IBooksWithInterface>();
+            // refactoring abit using Linq
+            templist = books.Where(c =>
+            c.Title.ToLower().Contains(search.ToLower())
+            || c.Author.ToLower().Contains(search.ToLower())).ToList();
 
+            /*
             foreach (var book in books)
             {
                 if (book.Author.Contains(search) || book.Title.Contains(search))
@@ -38,7 +43,7 @@ namespace bookstore.backend.Class
                     templist.Add(book);
                 }
             }
-
+            */
             return templist.AsEnumerable();
         }
         /// <summary>

@@ -20,11 +20,11 @@ namespace bookstore.frontend
             foreach (var book in input.BooksInCart)
             {
                 // check if Coustomer ordered more than where in stock
-                int status = check(book.InStock, book.NumberOfThisBookIncart);              
+                int status = backend.Class.ShopingCart.check(book.InStock, book.NumberOfThisBookIncart);              
                 if (status != 0)// if its not zero a book was orderd.
                 {
-                    totalcost = totalcost + (status * book.Price);
-
+                    //totalcost = totalcost + (status * book.Price);
+                    totalcost = backend.Class.ShopingCart.TotalCost(totalcost, book.Price, status);
                     ListViewItem temp = new ListViewItem();
                     temp.Text = book.Title;
                     temp.SubItems.Add(book.Author);
@@ -40,7 +40,7 @@ namespace bookstore.frontend
 
             foreach (var book in input.BooksInCart)
             {
-                int status = outofstock(book.InStock, book.NumberOfThisBookIncart);
+                int status =backend.Class.ShopingCart.outofstock(book.InStock, book.NumberOfThisBookIncart);
                 if (status != -1)
                 {
                     ListViewItem temp2 = new ListViewItem();
@@ -53,6 +53,8 @@ namespace bookstore.frontend
             }
             LVnotInStock.Items.AddRange(listviewCoulums2.ToArray());
         }
+
+        /*
         private int outofstock(int instock, int orderd)
         {
             int orderstatus = instock - orderd;
@@ -74,6 +76,8 @@ namespace bookstore.frontend
                 return orderd;
             }
         }
+        */
+
         private void Notification_Load(object sender, EventArgs e)
         {
 

@@ -96,7 +96,8 @@ namespace bookstore.frontend
                 if (list.Author.Contains(author) && list.Title.Contains(title))
                 {  // ok it exists in list this specifik one, so add one
                     list.addtocart();
-                    totalcost = totalcost + list.Price;
+                    // totalcost = totalcost + list.Price;
+                    totalcost = ShopingCart.ADD(totalcost, list.Price);
                     exists = true;
                     break; // only one so break
                 }
@@ -106,7 +107,8 @@ namespace bookstore.frontend
             {
                 IBooksWithInterface temp = new IBooksWithInterface(title, author, price, instock);
                 temp.addtocart();
-                totalcost = totalcost + price;
+                //totalcost = totalcost + price;
+                totalcost = ShopingCart.ADD(totalcost, price);
                 templist.Add(temp);
             }
                 PopulateInCartListView(templist.AsEnumerable());

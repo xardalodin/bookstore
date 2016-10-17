@@ -58,6 +58,7 @@
     <Compile Include="backend\Class\IBookstoreService.cs" />
     <Compile Include="backend\Class\IBooksWithInterface.cs" />
     <Compile Include="backend\Class\ShopingCart.cs" />
+    <Compile Include="backend\Class\UITools.cs" />
     <Compile Include="backend\IBookstoreService.cs" />
     <Compile Include="backend\IBook.cs" />
     <Compile Include="Form1.cs">

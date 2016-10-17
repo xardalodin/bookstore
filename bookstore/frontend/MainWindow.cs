@@ -86,10 +86,14 @@ namespace bookstore.frontend
             decimal price = decimal.Parse(LVSeach.SelectedItems[0].SubItems[2].Text); 
             int instock = int.Parse(LVSeach.SelectedItems[0].SubItems[3].Text);
             //download whats inside the cart
-            
-            templist = getLVcart();
+            IBooksWithInterface temp = new IBooksWithInterface(title, author, price, instock);
+
+            templist = getLVcart();     // call function here instead
+
             LVCART.Items.Clear(); // now clear it 
-            // check if title already exists title && author same.
+            PopulateInCartListView(UITools.checkIFExistInCart(totalcost, temp, templist, out totalcost).AsEnumerable());
+
+            /* check if title already exists title && author same.
             bool exists = false;
             foreach (var list in templist)
             {
@@ -105,14 +109,14 @@ namespace bookstore.frontend
             // if it did not exists
             if (!exists)
             {
-                IBooksWithInterface temp = new IBooksWithInterface(title, author, price, instock);
+               
                 temp.addtocart();
                 //totalcost = totalcost + price;
                 totalcost = ShopingCart.ADD(totalcost, price);
                 templist.Add(temp);
-            }
-                PopulateInCartListView(templist.AsEnumerable());
-                tbTotalCost.Text = totalcost.ToString();
+            }*/
+            //PopulateInCartListView(templist.AsEnumerable());
+            tbTotalCost.Text = totalcost.ToString();
 
         }
 
@@ -168,6 +172,9 @@ namespace bookstore.frontend
             string author = LVCART.SelectedItems[0].SubItems[1].Text;
             //download cart 
             templist = getLVcart();
+            LVCART.Items.Clear();
+            PopulateInCartListView( UITools.removeFromCart(totalcost, title, author, templist,out totalcost).AsEnumerable());
+            /*
             int i = 0;
             foreach (var list in templist)
             {
@@ -193,6 +200,7 @@ namespace bookstore.frontend
             }
             LVCART.Items.Clear();
             PopulateInCartListView(templist.AsEnumerable());
+            */
             tbTotalCost.Text = totalcost.ToString();
         }
 

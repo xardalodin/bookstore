@@ -9,10 +9,11 @@ namespace bookstore.backend.Class
     public class IBooksWithInterface : backend.IBook
     {
 
-        private string author;
-        private decimal price;
-        private string title;
-        private int inStock;
+        public string author;
+        public decimal price;
+        public string title;
+        public int inStock;
+
         private int numberOfThisBookIncart;
         public string Author { get { return author; } }
         public decimal Price { get { return price; } }
@@ -20,6 +21,9 @@ namespace bookstore.backend.Class
         public int InStock { get { return inStock; } }
 
         public int NumberOfThisBookIncart { get { return numberOfThisBookIncart; } set { numberOfThisBookIncart = value; } }
+
+        public IBooksWithInterface()
+        { }
         public IBooksWithInterface(string title, string author, decimal price,int instock)
         {
             this.price = price;

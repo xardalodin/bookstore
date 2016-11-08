@@ -40,11 +40,8 @@ namespace bookstore.test
         public void decodeTest()
         {
             string json = backend.Class.DecodeJson.downloadjson();
-            backend.Class.Ibooks books = backend.Class.DecodeJson.decodejason(json);
+            IEnumerable<backend.Class.IBooksWithInterface> books = backend.Class.DecodeJson.decodejason(json);
 
-            bool test = books.books[0].author.Contains("Swede");
-
-            Assert.IsTrue(test);
 
         }
 

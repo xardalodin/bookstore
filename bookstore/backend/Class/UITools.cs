@@ -14,7 +14,7 @@ namespace bookstore.backend.Class
             
             foreach (var l in List)
             {
-                if (l.Author.Contains(bookToMove.Author) && l.Title.Contains(bookToMove.Title))
+                if (l.Author.Contains(bookToMove.Author) && l.Title.Contains(bookToMove.Title) && (l.Price == bookToMove.Price))
                 {
                     l.addtocart();
                     TotalCost = ShopingCart.ADD(InCost, l.Price);               
@@ -30,12 +30,12 @@ namespace bookstore.backend.Class
             return List; 
         }
 
-        public static List<IBooksWithInterface> removeFromCart(decimal InCost,string title,string author, List<IBooksWithInterface> List, out decimal TotalCost)
+        public static List<IBooksWithInterface> removeFromCart(decimal InCost,string title,string author,decimal Cost, List<IBooksWithInterface> List, out decimal TotalCost)
         {
             int i = 0;
             foreach (var l in List)
             {
-                if(l.Author.Contains(author)&& l.Title.Contains(title))
+                if(l.Author.Contains(author)&& l.Title.Contains(title) && (l.Price == Cost))
                 {
                     if (l.NumberOfThisBookIncart > 1)
                     {

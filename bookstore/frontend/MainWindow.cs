@@ -32,13 +32,6 @@ namespace bookstore.frontend
                 backend.Class.IBookstoreService s = new backend.Class.IBookstoreService();
                 IEnumerable<backend.IBook> result = await s.GetBooksAsync(tBSearch.Text);
                 PopulateSearchListView(result);
-                // search engine in backend , Titel and Author. 
-                // null test on input 
-                // search for title then Author and add everything to a list , send back to list view
-
-
-                // populate the listview with search result.
-
             }
         }
 
@@ -68,9 +61,6 @@ namespace bookstore.frontend
         private void btnAddtoCart_Click(object sender, EventArgs e)
         {
             moveSelectedToCart();
-            //backend.Class.IBookstoreService s = new backend.Class.IBookstoreService();
-            //IEnumerable<backend.Class.IBooksWithInterface> result = await s.GetBooksAsync(tBSearch.Text);
-            //PopulateInCartListView(result);
         }
 
         private void moveSelectedToCart()
@@ -93,29 +83,6 @@ namespace bookstore.frontend
             LVCART.Items.Clear(); // now clear it 
             PopulateInCartListView(UITools.checkIFExistInCart(totalcost, temp, templist, out totalcost).AsEnumerable());
 
-            /* check if title already exists title && author same.
-            bool exists = false;
-            foreach (var list in templist)
-            {
-                if (list.Author.Contains(author) && list.Title.Contains(title))
-                {  // ok it exists in list this specifik one, so add one
-                    list.addtocart();
-                    // totalcost = totalcost + list.Price;
-                    totalcost = ShopingCart.ADD(totalcost, list.Price);
-                    exists = true;
-                    break; // only one so break
-                }
-            }
-            // if it did not exists
-            if (!exists)
-            {
-               
-                temp.addtocart();
-                //totalcost = totalcost + price;
-                totalcost = ShopingCart.ADD(totalcost, price);
-                templist.Add(temp);
-            }*/
-            //PopulateInCartListView(templist.AsEnumerable());
             tbTotalCost.Text = totalcost.ToString();
 
         }
@@ -124,7 +91,7 @@ namespace bookstore.frontend
         {
             List<IBooksWithInterface> templist = new List<IBooksWithInterface>();
             
-            int i = 0; // when things just dont work
+            int i = 0; 
             foreach (var row in LVCART.Items)
             {
              string title = LVCART.Items[i].SubItems[0].Text;
@@ -141,7 +108,7 @@ namespace bookstore.frontend
             return templist;
         }
         private void PopulateInCartListView(IEnumerable<backend.IBook> books)
-        {   // yes brain its simular code, could break out but not refactoring at the moment...
+        {   
 
             List<ListViewItem> listviewCoulums = new List<ListViewItem>();
 
@@ -170,37 +137,12 @@ namespace bookstore.frontend
             List<IBooksWithInterface> templist = new List<IBooksWithInterface>();
             string title = LVCART.SelectedItems[0].SubItems[0].Text;
             string author = LVCART.SelectedItems[0].SubItems[1].Text;
+            string price = LVCART.SelectedItems[0].SubItems[2].Text;
             //download cart 
             templist = getLVcart();
             LVCART.Items.Clear();
-            PopulateInCartListView( UITools.removeFromCart(totalcost, title, author, templist,out totalcost).AsEnumerable());
-            /*
-            int i = 0;
-            foreach (var list in templist)
-            {
-                if (list.Author.Contains(author) && list.Title.Contains(title))
-                {   // if more than one book subtrackt one    
-                    if (list.NumberOfThisBookIncart > 1)
-                    {
-                        list.subFromcart();
-                        totalcost = totalcost - list.Price;
-                        break;
-                    }
-                    else
-                    {
-                        list.subFromcart();
-                        totalcost = totalcost - list.Price;
-                        templist.RemoveAt(i);
-                        break;
-                    }
-                    
-                }
-                i++; // increment;
-               
-            }
-            LVCART.Items.Clear();
-            PopulateInCartListView(templist.AsEnumerable());
-            */
+            PopulateInCartListView( UITools.removeFromCart(totalcost, title, author,decimal.Parse(price), templist,out totalcost).AsEnumerable());
+ 
             tbTotalCost.Text = totalcost.ToString();
         }
 

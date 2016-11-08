@@ -9,16 +9,16 @@ namespace bookstore.backend.Class
     public class IBooksWithInterface : backend.IBook
     {
 
-        public string author;
-        public decimal price;
-        public string title;
-        public int inStock;
+        private string author;
+        private decimal price;
+        private string title;
+        private int inStock;
 
         private int numberOfThisBookIncart;
-        public string Author { get { return author; } }
-        public decimal Price { get { return price; } }
-        public string Title { get { return title; } }
-        public int InStock { get { return inStock; } }
+        public string Author { get { return author; } set { author = value; } }
+        public decimal Price { get { return price; } set { price = value; } }
+        public string Title { get { return title; } set { title = value; } }
+        public int InStock { get { return inStock;} set { inStock = value; } }
 
         public int NumberOfThisBookIncart { get { return numberOfThisBookIncart; } set { numberOfThisBookIncart = value; } }
 
